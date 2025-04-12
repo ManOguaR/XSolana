@@ -1,0 +1,30 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="XSolana.AnchorIdlCodeGen"
+             AssemblyFile="$(MSBuildThisFileDirectory)..\XSolana.Codegen.dll" />
+
+  <ItemGroup Condition="'$(XSolanaCodegenEnabled)' == 'true'">
+    <AnchorIdlFiles Include="**\*.idl.json" />
+  </ItemGroup>
+
+  <Target Name="RunXSolanaCodegen"
+          BeforeTargets="BeforeCompile"
+          Condition="'$(XSolanaCodegenEnabled)' == 'true'">
+
+    <MakeDir Directories="$(XSolanaCodegenOutputDir)" />
+
+    <XSolana.AnchorIdlCodeGen
+      IdlFiles="@(AnchorIdlFiles)"
+      OutputDir="$(XSolanaCodegenOutputDir)"
+      ProjectDir="$(MSBuildProjectDirectory)" />
+
+    <ItemGroup>
+      <Compile Include="$(XSolanaCodegenOutputDir)\**\*.g.cs"
+               Visible="false"
+               AutoGen="true"
+               DesignTime="true"
+               DependentUpon="%(Filename)" />
+    </ItemGroup>
+
+  </Target>
+</Project>

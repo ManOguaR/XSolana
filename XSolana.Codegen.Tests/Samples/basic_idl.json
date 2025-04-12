@@ -1,0 +1,22 @@
+﻿{
+    "version": "0.1.0",
+    "name": "basic_program",
+    "instructions": [
+        {
+            "name": "initialize",
+            "accounts": [
+                {
+                    "name": "payer",
+                    "isMut": true,
+                    "isSigner": true
+                }
+            ],
+            "args": [
+                {
+                    "name": "value",
+                    "type": "u64"
+                }
+            ]
+        }
+    ]
+}

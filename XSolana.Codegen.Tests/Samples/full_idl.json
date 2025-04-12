@@ -1,0 +1,94 @@
+﻿{
+  "version": "0.1.0",
+  "name": "full_test_program",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "MyAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "counter",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "CustomStruct",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CustomEnum",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "One" },
+          {
+            "name": "Two",
+            "fields": [ "u8" ]
+          },
+          {
+            "name": "Three",
+            "fields": [
+              {
+                "name": "value",
+                "type": "u64"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "MyEvent",
+      "fields": [
+        {
+          "name": "user",
+          "type": "publicKey"
+        },
+        {
+          "name": "value",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "You are not allowed."
+    }
+  ]
+}

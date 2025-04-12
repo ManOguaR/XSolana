@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>XSolana</RootNamespace>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Title>XSolana Code Generator</Title>
+    <Company>ManOguaR</Company>
+    <Product>XSolana</Product>
+    <Authors>ManOguaR</Authors>
+    <Description>XSolana is a code generation siute for .net. Ingests IDL and erupts C# models ready-to use within your code.</Description>
+    <Copyright>2025 Eduardo Ridao</Copyright>
+
+    <PackageProjectUrl>https://github.com/ManOguaR/XSolana</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>XSolana.Codegen</PackageId>
+    <Version>1.0.0</Version>
+    <PackageTags>C#;Solana;CodeGen;IDL;T4;Anchor</PackageTags>
+  </PropertyGroup>
+
+</Project>

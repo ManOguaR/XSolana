@@ -140,7 +140,7 @@ namespace XSolana.Builders
             {
                 foreach (var include in Includes)
                 {
-                    WriteLine($"using {include}");
+                    WriteLine($"using {include};");
                 }
             }
             WriteReturn();

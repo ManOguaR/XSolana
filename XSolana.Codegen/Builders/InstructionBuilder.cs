@@ -1,4 +1,5 @@
-﻿using XSolana.Builders.Extensions;
+﻿using System.Net.Sockets;
+using XSolana.Builders.Extensions;
 using XSolana.Conventions;
 
 namespace XSolana.Builders
@@ -14,7 +15,12 @@ namespace XSolana.Builders
         /// <param name="className">A string representing the name of the class to be generated.</param>
         /// <param name="namespace">A string representing the namespace for the generated class.</param>
         public InstructionBuilder(string className, string @namespace)
-            : base(className, @namespace) { }
+            : base(className, @namespace) {
+            Includes = new[] {
+                "Solnet.Rpc.Models",
+                "Solnet.Wallet"
+            };
+        }
 
         /// <summary>
         /// Transforms a ProgramDefinition into C# code for instruction builders.
@@ -46,7 +52,7 @@ BeginNamespace();
             BeginBlock();
                 foreach (var account in instr.Accounts)
                 {
-                    string metaType = account.IsSigner ? "WritableSigner" : account.IsMut ? "Writable" : "Readonly";
+                    string metaType = account.IsSigner ? "Writable" : account.IsMut ? "Writable" : "Readonly";
                 WriteLine($"AccountMeta.{metaType}({account.Name}, {account.IsSigner.ToString().ToLower()}),");
                 }
             EndBlock(";");

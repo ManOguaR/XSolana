@@ -19,16 +19,20 @@
       ProjectDir="$(MSBuildProjectDirectory)" />
 
     <ItemGroup>
-      <Compile Remove="$(XSolanaCodegenOutputDir)\**\*.g.cs" />
+      <GeneratedFiles Include="$(XSolanaCodegenOutputDir)\**\*.g.cs" />
     </ItemGroup>
 
+    <!-- Explicitly add generated files to compilation -->
     <ItemGroup>
-      <Compile Include="$(XSolanaCodegenOutputDir)\**\*.g.cs"
+      <Compile Include="@(GeneratedFiles)"
                Visible="false"
                AutoGen="true"
                DesignTime="true"
                DependentUpon="%(Filename)" />
+      <!-- Ensure proper cleaning -->
+      <FileWrites Include="@(GeneratedFiles)" />
     </ItemGroup>
 
   </Target>
+
 </Project>

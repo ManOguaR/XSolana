@@ -6,23 +6,25 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>XSolana Code Generator</Title>
     <Company>ManOguaR</Company>
-    <Product>XSolana</Product>
-    <Authors>ManOguaR</Authors>
     <Description>XSolana is a code generation siute for .net. Ingests IDL and erupts C# models ready-to use within your code.</Description>
-    <Copyright>2025 Eduardo Ridao</Copyright>
 
-    <PackageProjectUrl>https://github.com/ManOguaR/XSolana</PackageProjectUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeBuildOutput>true</IncludeBuildOutput>
     <PackageId>XSolana.Codegen</PackageId>
-    <Version>1.0.0</Version>
-    <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>C#;Solana;CodeGen;IDL;T4;Anchor</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="README.md" Pack="true" Visible="false" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Templates\InstructionBuilder.tt" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="build\XSolana.Codegen.props" Pack="true" PackagePath="buildTransitive\" />
+    <None Include="build\XSolana.Codegen.targets" Pack="true" PackagePath="buildTransitive\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,18 +32,4 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="" />
-    <None Include="logo.png" Pack="true" PackagePath="" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="build\XSolana.Codegen.props" Pack="true" PackagePath="buildTransitive\" />
-    <None Include="build\XSolana.Codegen.targets" Pack="true" PackagePath="buildTransitive\" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Templates\" />
-  </ItemGroup>
-  
 </Project>

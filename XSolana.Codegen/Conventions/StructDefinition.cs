@@ -10,6 +10,6 @@ namespace XSolana.Conventions
         /// <summary>
         /// List of field definitions in the structure.
         /// </summary>
-        public List<FieldDefinition> Fields { get; set; } = new List<FieldDefinition>();
+        public List<FieldDefinition> Fields { get; set; } = [];
     }
 }

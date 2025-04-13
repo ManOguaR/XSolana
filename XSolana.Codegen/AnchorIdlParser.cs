@@ -31,19 +31,16 @@ namespace XSolana
         /// <exception cref="InvalidDataException">Thrown when the IDL cannot be deserialized.</exception>
         public ProgramDefinition ParseFromJson(string json)
         {
-            var idl = JsonConvert.DeserializeObject<IdlJsonModel>(json);
-            if (idl == null)
-                throw new InvalidDataException("El IDL no pudo deserializarse.");
-
+            var idl = JsonConvert.DeserializeObject<IdlJsonModel>(json) ?? throw new InvalidDataException("El IDL no pudo deserializarse.");
             var program = new ProgramDefinition
             {
                 Name = idl.Name,
                 Version = idl.Version,
-                Instructions = InstructionParser.Parse(idl.Instructions ?? new List<InstructionJsonModel>()),
-                Accounts = AccountParser.Parse(idl.Accounts ?? new List<AccountJsonModel>()),
-                Types = TypeParser.Parse(idl.Types ?? new List<TypeJsonModel>()),
-                Events = EventParser.Parse(idl.Events ?? new List<EventJsonModel>()),
-                Errors = ErrorParser.Parse(idl.Errors ?? new List<ErrorJsonModel>())
+                Instructions = InstructionParser.Parse(idl.Instructions ?? []),
+                Accounts = AccountParser.Parse(idl.Accounts ?? []),
+                Types = TypeParser.Parse(idl.Types ?? []),
+                Events = EventParser.Parse(idl.Events ?? []),
+                Errors = ErrorParser.Parse(idl.Errors ?? [])
             };
 
             return program;

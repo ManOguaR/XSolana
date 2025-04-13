@@ -20,26 +20,26 @@ namespace XSolana.Conventions
         /// <summary>
         /// A list of instructions that the program can handle.
         /// </summary>
-        public List<InstructionDefinition> Instructions { get; set; } = new List<InstructionDefinition>();
+        public List<InstructionDefinition> Instructions { get; set; } = [];
 
         /// <summary>
         /// A list of accounts that the program can handle.
         /// </summary>
-        public List<AccountDefinition> Accounts { get; set; } = new List<AccountDefinition>();
+        public List<AccountDefinition> Accounts { get; set; } = [];
 
         /// <summary>
         /// A list of types that the program can handle.
         /// </summary>
-        public List<TypeDefinition> Types { get; set; } = new List<TypeDefinition>();
+        public List<TypeDefinition> Types { get; set; } = [];
 
         /// <summary>
         /// A list of events that the program can emit.
         /// </summary>
-        public List<EventDefinition> Events { get; set; } = new List<EventDefinition>();
+        public List<EventDefinition> Events { get; set; } = [];
 
         /// <summary>
         /// A list of errors that the program can emit.
         /// </summary>
-        public List<ErrorDefinition> Errors { get; set; } = new List<ErrorDefinition>();
+        public List<ErrorDefinition> Errors { get; set; } = [];
     }
 }

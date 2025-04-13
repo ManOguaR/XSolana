@@ -10,7 +10,7 @@ namespace XSolana.Conventions
         /// <summary>
         /// A list of enum variants.
         /// </summary>
-        public List<EnumVariant> Variants { get; set; } = new List<EnumVariant>();
+        public List<EnumVariant> Variants { get; set; } = [];
     }
 
 }

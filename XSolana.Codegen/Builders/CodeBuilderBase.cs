@@ -13,7 +13,7 @@ namespace XSolana.Builders
     public abstract class CodeBuilderBase
     {
         private int _indent = 0;
-        private readonly List<int> _namespaceSections = new List<int>();
+        private readonly List<int> _namespaceSections = [];
         private static readonly string[] TypeTypes = { "class", "struct", "interface" };
 
         /// <summary>

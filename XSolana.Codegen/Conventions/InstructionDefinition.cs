@@ -15,11 +15,11 @@ namespace XSolana.Conventions
         /// <summary>
         /// A list of arguments for the instruction.
         /// </summary>
-        public List<FieldDefinition> Args { get; set; } = new List<FieldDefinition>();
+        public List<FieldDefinition> Args { get; set; } = [];
 
         /// <summary>
         /// A list of accounts metadata associated with the instruction.
         /// </summary>
-        public List<AccountMetaDefinition> Accounts { get; set; } = new List<AccountMetaDefinition>();
+        public List<AccountMetaDefinition> Accounts { get; set; } = [];
     }
 }

@@ -15,6 +15,6 @@ namespace XSolana.Conventions
         /// <summary>
         /// A list of field definitions that describe the data associated with the event.
         /// </summary>
-        public List<FieldDefinition> Fields { get; set; } = new List<FieldDefinition>();
+        public List<FieldDefinition> Fields { get; set; } = [];
     }
 }

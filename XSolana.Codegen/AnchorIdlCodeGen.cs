@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
+using XSolana.Conventions;
 
 namespace XSolana
 {
@@ -51,7 +52,7 @@ namespace XSolana
                     var program = parser.ParseFromFile(idlPath);
 
                     //RunConstantsBuilder(program, OutputDir);
-                    //RunInstructionBuilder(program, OutputDir);
+                    RunInstructionBuilder(program, OutputDir);
                     // RunProgramService(program, OutputDir);
                     // RunAccountLayouts(program, OutputDir);
                 }
@@ -63,6 +64,18 @@ namespace XSolana
                 Log.LogErrorFromException(ex, true);
                 return false;
             }
+        }
+
+        private void RunInstructionBuilder(ProgramDefinition model, string outputDir)
+        {
+            var builder = new Builders.InstructionBuilder($"{model.Name}InstructionBuilder", $"Generated.{model.Name}");
+            var content = builder.TransformText(model);
+
+            var outputPath = Path.Combine(outputDir, $"{Sanitize(model.Name)}.InstructionBuilder.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            File.WriteAllText(outputPath, content);
+
+            Log.LogMessage(MessageImportance.Low, $"[XSolana] InstructionBuilder generado en: {outputPath}");
         }
 
         //private void RunConstantsBuilder(ProgramDefinition model, string outputDir)

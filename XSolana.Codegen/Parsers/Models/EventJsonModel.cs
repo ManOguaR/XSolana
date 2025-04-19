@@ -18,6 +18,12 @@ namespace XSolana.Parsers.Models
         /// A list of fields in the event.
         /// </summary>
         [JsonProperty("fields")]
-        public List<IdlFieldJsonModel> Fields { get; set; }
+        public List<IdlFieldJsonModel> Fields { get; set; } = [];
+
+        /// <summary>
+        /// The event's discriminator.
+        /// </summary>
+        [JsonProperty("discriminator")]
+        public List<byte> Discriminator { get; set; }
     }
 }

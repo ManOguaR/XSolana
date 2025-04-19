@@ -27,11 +27,14 @@ namespace XSolana.Parsers
         /// </summary>
         public static AccountDefinition Parse(AccountJsonModel model)
         {
-            var fields = FieldParser.Parse(model.Type.Fields);
+            var fields = model.Type?.Fields != null
+                    ? FieldParser.Parse(model.Type.Fields)
+                    : [];
 
             return new AccountDefinition
             {
                 Name = model.Name,
+                Discriminator = model.Discriminator,
                 Type = new StructDefinition
                 {
                     Fields = fields

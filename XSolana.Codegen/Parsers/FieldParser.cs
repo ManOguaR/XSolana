@@ -38,7 +38,7 @@ namespace XSolana.Parsers
         /// <summary>
         /// Parses the raw type representation (string or object) into a normalized type string.
         /// </summary>
-        private static string ParseType(object typeNode)
+        public static string ParseType(object typeNode)
         {
             if (typeNode == null)
                 return "unknown";

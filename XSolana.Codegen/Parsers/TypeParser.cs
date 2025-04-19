@@ -31,7 +31,8 @@ namespace XSolana.Parsers
 
             var def = new TypeDefinition
             {
-                Name = model.Name
+                Name = model.Name,
+                Discriminator = model.Discriminator
             };
 
             if (kind == "struct")

@@ -9,7 +9,55 @@ namespace XSolana.Parsers.Models
     public class IdlJsonModel
     {
         /// <summary>
-        /// The name of the program.
+        /// The address of the program.
+        /// </summary>
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
+        /// <summary>
+        /// The metadata associated with the IDL.
+        /// </summary>
+        [JsonProperty("metadata")]
+        public IdlMetadataJsonModel Metadata { get; set; }
+
+        /// <summary>
+        /// A list of instructions in the IDL.
+        /// </summary>
+        [JsonProperty("instructions")]
+        public List<InstructionJsonModel> Instructions { get; set; } = [];
+
+        /// <summary>
+        /// A list of accounts in the IDL.
+        /// </summary>
+        [JsonProperty("accounts")]
+        public List<AccountJsonModel> Accounts { get; set; } = [];
+
+        /// <summary>
+        /// A list of types in the IDL.
+        /// </summary>
+        [JsonProperty("types")]
+        public List<TypeJsonModel> Types { get; set; } = [];
+
+        /// <summary>
+        /// A list of events in the IDL.
+        /// </summary>
+        [JsonProperty("events")]
+        public List<EventJsonModel> Events { get; set; } = [];
+
+        /// <summary>
+        /// A list of errors in the IDL.
+        /// </summary>
+        [JsonProperty("errors")]
+        public List<ErrorJsonModel> Errors { get; set; } = [];
+    }
+
+    /// <summary>
+    /// Represents the metadata associated with the IDL.
+    /// </summary>
+    public class IdlMetadataJsonModel
+    {
+        /// <summary>
+        /// The name of the IDL.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -21,33 +69,15 @@ namespace XSolana.Parsers.Models
         public string Version { get; set; }
 
         /// <summary>
-        /// A list of instructions in the IDL.
+        /// The IDL specification.
         /// </summary>
-        [JsonProperty("instructions")]
-        public List<InstructionJsonModel> Instructions { get; set; }
+        [JsonProperty("spec")]
+        public string Spec { get; set; }
 
         /// <summary>
-        /// A list of accounts in the IDL.
+        /// A description of the IDL.
         /// </summary>
-        [JsonProperty("accounts")]
-        public List<AccountJsonModel> Accounts { get; set; }
-
-        /// <summary>
-        /// A list of types in the IDL.
-        /// </summary>
-        [JsonProperty("types")]
-        public List<TypeJsonModel> Types { get; set; }
-
-        /// <summary>
-        /// A list of events in the IDL.
-        /// </summary>
-        [JsonProperty("events")]
-        public List<EventJsonModel> Events { get; set; }
-
-        /// <summary>
-        /// A list of errors in the IDL.
-        /// </summary>
-        [JsonProperty("errors")]
-        public List<ErrorJsonModel> Errors { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
     }
 }

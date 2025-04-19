@@ -1,14 +1,20 @@
 ﻿{
-  "version": "0.1.0",
-  "name": "full_test_program",
+  "address": "11111111111111111111111111111111",
+  "metadata": {
+    "name": "full_test_program",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Converted from legacy test format"
+  },
   "instructions": [
     {
       "name": "initialize",
+      "discriminator": [ 0, 0, 0, 0, 0, 0, 0, 1 ],
       "accounts": [
         {
           "name": "authority",
-          "isMut": true,
-          "isSigner": true
+          "writable": true,
+          "signer": true
         }
       ],
       "args": [
@@ -22,6 +28,12 @@
   "accounts": [
     {
       "name": "MyAccount",
+      "discriminator": [ 1, 1, 1, 1, 1, 1, 1, 1 ]
+    }
+  ],
+  "types": [
+    {
+      "name": "MyAccount",
       "type": {
         "kind": "struct",
         "fields": [
@@ -31,9 +43,7 @@
           }
         ]
       }
-    }
-  ],
-  "types": [
+    },
     {
       "name": "CustomStruct",
       "type": {

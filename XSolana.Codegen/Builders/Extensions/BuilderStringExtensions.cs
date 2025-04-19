@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace XSolana.Builders.Extensions
 {
@@ -9,14 +12,27 @@ namespace XSolana.Builders.Extensions
     public static class BuilderStringExtensions
     {
         /// <summary>
-        /// Transforms a string into PascalCase.
+        /// Transforms a string into PascalCase, handling snake_case, kebab-case, camelCase, etc.
         /// </summary>
-        /// <param name="name">A string to be transformed into PascalCase.</param>
-        /// <returns>Returns the transformed string in PascalCase format.</returns>
+        /// <param name="name">The input string to transform.</param>
+        /// <returns>A PascalCase representation of the input.</returns>
         public static string ToPascalCase(this string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return name;
-            return char.ToUpperInvariant(name[0]) + name.Substring(1);
+            if (string.IsNullOrWhiteSpace(name))
+                return string.Empty;
+
+            // Replace separators with spaces
+            name = Regex.Replace(name, @"[_\-\s]+", " ");
+
+            // Insert space before capital letters (camelCase → camel Case)
+            name = Regex.Replace(name, @"(?<=[a-z])([A-Z])", " $1");
+
+            // Split and capitalize
+            TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+            var words = name.Split([' '], StringSplitOptions.RemoveEmptyEntries);
+            var result = string.Concat(words.Select(w => textInfo.ToTitleCase(w.ToLowerInvariant())));
+
+            return result;
         }
 
         /// <summary>
@@ -71,6 +87,7 @@ namespace XSolana.Builders.Extensions
                         ? typeof(string).FullName : useCodeConvention
                         ? "string" : nameof(String);
                 case "publicKey":
+                case "pubkey":
                     return useFullName
                         ? typeof(PublicKey).FullName : nameof(PublicKey);
                 default:

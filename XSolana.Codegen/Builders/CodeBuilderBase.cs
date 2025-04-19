@@ -46,8 +46,8 @@ namespace XSolana.Builders
         /// </summary>
         protected CodeBuilderBase(string className, string @namespace)
         {
-            TypeName = className;
-            Namespace = @namespace;
+            TypeName = className.ToPascalCase();
+            Namespace = @namespace.ToPascalCase();
         }
 
         /// <summary>

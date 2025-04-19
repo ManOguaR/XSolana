@@ -52,7 +52,7 @@ BeginNamespace();
             BeginBlock();
                 foreach (var account in instr.Accounts)
                 {
-                    string metaType = account.IsSigner ? "Writable" : account.IsMut ? "Writable" : "Readonly";
+                    string metaType = account.IsSigner ? "Writable" : account.IsMut ? "Writable" : "ReadOnly";
                 WriteLine($"AccountMeta.{metaType}({account.Name}, {account.IsSigner.ToString().ToLower()}),");
                 }
             EndBlock(";");

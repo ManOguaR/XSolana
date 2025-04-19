@@ -33,7 +33,7 @@ namespace XSolana.Parsers
                 args.Add(new FieldDefinition
                 {
                     Name = arg.Name,
-                    Type = arg.Type
+                    Type = FieldParser.ParseType(arg.Type)
                 });
             }
 
@@ -43,8 +43,25 @@ namespace XSolana.Parsers
                 accounts.Add(new AccountMetaDefinition
                 {
                     Name = acc.Name,
-                    IsMut = acc.IsMut,
-                    IsSigner = acc.IsSigner
+                    IsMut = acc.Writable ?? false,
+                    IsSigner = acc.Signer ?? false,
+                    Address = acc.Address,
+                    Docs = acc.Docs,
+                    Pda = acc.Pda != null ? new PdaDefinition
+                    {
+                        Seeds = acc.Pda.Seeds?.ConvertAll(seed => new PdaSeedDefinition
+                        {
+                            Kind = seed.Kind,
+                            Value = seed.Value,
+                            Path = seed.Path,
+                            Account = seed.Account
+                        }),
+                        Program = acc.Pda.Program != null ? new PdaProgramDefinition
+                        {
+                            Kind = acc.Pda.Program.Kind,
+                            Value = acc.Pda.Program.Value
+                        } : null
+                    } : null
                 });
             }
 
@@ -52,8 +69,10 @@ namespace XSolana.Parsers
             {
                 Name = instr.Name,
                 Args = args,
-                Accounts = accounts
+                Accounts = accounts,
+                Discriminator = instr.Discriminator
             };
+
         }
     }
 }

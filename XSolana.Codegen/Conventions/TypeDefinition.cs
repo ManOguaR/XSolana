@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace XSolana.Conventions
 {
@@ -41,6 +42,11 @@ namespace XSolana.Conventions
         /// The type of the definition, which can be either a struct or an enum.
         /// </summary>
         public EnumDefinition Enum { get; set; }
+
+        /// <summary>
+        /// A list of discriminators for the type definition.
+        /// </summary>
+        public List<byte> Discriminator { get; set; } = [];
 
         /// <summary>
         /// Gets the body of the type definition, which can be either a struct or an enum.

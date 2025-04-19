@@ -16,5 +16,11 @@ namespace XSolana.Conventions
         /// A list of field definitions that describe the data associated with the event.
         /// </summary>
         public List<FieldDefinition> Fields { get; set; } = [];
+
+        /// <summary>
+        /// A list of discriminators for the event definition.
+        /// </summary>
+        public List<byte> Discriminator { get; set; } = [];
+
     }
 }

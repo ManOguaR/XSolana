@@ -19,6 +19,12 @@ namespace XSolana.Parsers.Models
         /// </summary>
         [JsonProperty("type")]
         public AccountTypeJsonModel Type { get; set; }
+
+        /// <summary>
+        /// The account discriminators.
+        /// </summary>
+        [JsonProperty("discriminator")]
+        public List<byte> Discriminator { get; set; } = [];
     }
 
     /// <summary>
@@ -36,6 +42,6 @@ namespace XSolana.Parsers.Models
         /// A list of fields in the account type.
         /// </summary>
         [JsonProperty("fields")]
-        public List<IdlFieldJsonModel> Fields { get; set; }
+        public List<IdlFieldJsonModel> Fields { get; set; } = [];
     }
 }

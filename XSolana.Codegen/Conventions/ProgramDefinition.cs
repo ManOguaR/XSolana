@@ -8,14 +8,29 @@ namespace XSolana.Conventions
     public class ProgramDefinition
     {
         /// <summary>
-        /// The name of the program.
+        /// The address (program ID) of the program.
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
+        /// The name of the program (from metadata).
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The version of the program.
+        /// The version of the program (from metadata).
         /// </summary>
         public string Version { get; set; }
+
+        /// <summary>
+        /// Optional spec version of the IDL.
+        /// </summary>
+        public string Spec { get; set; }
+
+        /// <summary>
+        /// Optional description of the program.
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// A list of instructions that the program can handle.

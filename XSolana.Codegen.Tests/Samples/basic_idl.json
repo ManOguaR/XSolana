@@ -1,22 +1,32 @@
 ﻿{
-    "version": "0.1.0",
+  "address": "11111111111111111111111111111111",
+  "metadata": {
     "name": "basic_program",
-    "instructions": [
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Converted from legacy test format"
+  },
+  "instructions": [
+    {
+      "name": "initialize",
+      "discriminator": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+      "accounts": [
         {
-            "name": "initialize",
-            "accounts": [
-                {
-                    "name": "payer",
-                    "isMut": true,
-                    "isSigner": true
-                }
-            ],
-            "args": [
-                {
-                    "name": "value",
-                    "type": "u64"
-                }
-            ]
+          "name": "payer",
+          "writable": true,
+          "signer": true
         }
-    ]
+      ],
+      "args": [
+        {
+          "name": "value",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [],
+  "types": [],
+  "events": [],
+  "errors": []
 }

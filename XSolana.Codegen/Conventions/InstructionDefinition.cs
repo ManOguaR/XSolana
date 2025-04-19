@@ -21,5 +21,10 @@ namespace XSolana.Conventions
         /// A list of accounts metadata associated with the instruction.
         /// </summary>
         public List<AccountMetaDefinition> Accounts { get; set; } = [];
+
+        /// <summary>
+        /// A list of discriminators for the instruction.
+        /// </summary>
+        public List<byte> Discriminator { get; set; } = [];
     }
 }

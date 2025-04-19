@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using XSolana.Conventions;
 using XSolana.Parsers.Models;
 
@@ -32,7 +33,8 @@ namespace XSolana.Parsers
             return new EventDefinition
             {
                 Name = model.Name,
-                Fields = fields
+                Fields = fields,
+                Discriminator = model.Discriminator
             };
         }
     }

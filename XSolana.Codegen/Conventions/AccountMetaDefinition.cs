@@ -1,4 +1,6 @@
-﻿namespace XSolana.Conventions
+﻿using System.Collections.Generic;
+
+namespace XSolana.Conventions
 {
     /// <summary>
     /// Represents a metadata definition for an account in Solana.
@@ -19,5 +21,8 @@
         /// Indicates whether the account is a signer.
         /// </summary>
         public bool IsSigner { get; set; }
+        public string Address { get; internal set; }
+        public List<string> Docs { get; internal set; }
+        public PdaDefinition Pda { get; internal set; }
     }
 }

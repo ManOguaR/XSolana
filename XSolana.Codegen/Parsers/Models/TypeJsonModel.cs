@@ -19,6 +19,12 @@ namespace XSolana.Parsers.Models
         /// </summary>
         [JsonProperty("type")]
         public DefinedTypeJsonModel Type { get; set; }
+
+        /// <summary>
+        /// The type's discriminator.
+        /// </summary>
+        [JsonProperty("discriminator")]
+        public List<byte> Discriminator { get; set; } = [];
     }
 
     /// <summary>
@@ -36,13 +42,13 @@ namespace XSolana.Parsers.Models
         /// A list of fields in the type.
         /// </summary>
         [JsonProperty("fields")]
-        public List<IdlFieldJsonModel> Fields { get; set; }
+        public List<IdlFieldJsonModel> Fields { get; set; } = [];
 
         /// <summary>
         /// A list of variants in the type (only for enums).
         /// </summary>
         [JsonProperty("variants")]
-        public List<EnumVariantJsonModel> Variants { get; set; }
+        public List<EnumVariantJsonModel> Variants { get; set; } = [];
     }
 
     /// <summary>

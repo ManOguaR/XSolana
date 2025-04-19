@@ -34,8 +34,11 @@ namespace XSolana
             var idl = JsonConvert.DeserializeObject<IdlJsonModel>(json) ?? throw new InvalidDataException("El IDL no pudo deserializarse.");
             var program = new ProgramDefinition
             {
-                Name = idl.Name,
-                Version = idl.Version,
+                Address = idl.Address,
+                Name = idl.Metadata?.Name,
+                Version = idl.Metadata?.Version,
+                Spec = idl.Metadata?.Spec,
+                Description = idl.Metadata?.Description,
                 Instructions = InstructionParser.Parse(idl.Instructions ?? []),
                 Accounts = AccountParser.Parse(idl.Accounts ?? []),
                 Types = TypeParser.Parse(idl.Types ?? []),

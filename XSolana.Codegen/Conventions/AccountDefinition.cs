@@ -1,4 +1,6 @@
-﻿namespace XSolana.Conventions
+﻿using System.Collections.Generic;
+
+namespace XSolana.Conventions
 {
     /// <summary>
     /// Represents an account definition in Solana.
@@ -14,5 +16,11 @@
         /// The account's structure definition.
         /// </summary>
         public StructDefinition Type { get; set; }
+
+        /// <summary>
+        /// A list of discriminators for the account.
+        /// </summary>
+        public List<byte> Discriminator { get; set; } = [];
+
     }
 }

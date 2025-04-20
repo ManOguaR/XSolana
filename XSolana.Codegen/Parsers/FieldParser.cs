@@ -65,7 +65,7 @@ namespace XSolana.Parsers
                     return $"{typeName}<{items[0].ToString()}, {items[1].ToString()}>";
                 }
 
-                return $"{typeName}<?>";
+                return $"{typeName}<>";
             }
 
             return typeNode.ToString();

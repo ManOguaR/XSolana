@@ -14,7 +14,7 @@ namespace XSolana.Builders
     {
         private int _indent = 0;
         private readonly List<int> _namespaceSections = [];
-        private static readonly string[] TypeTypes = { "class", "struct", "interface" };
+        private static readonly string[] TypeTypes = { "class", "struct", "interface", "enum" };
 
         /// <summary>
         /// The name of the class being built.
@@ -154,8 +154,8 @@ namespace XSolana.Builders
             if (_namespaceSections.Contains(_indent))
                 IndentAdd();
 
-            Code.AppendLine($"namespace {Namespace}");
-            Code.AppendLine("{");
+            WriteLine($"namespace {Namespace}");
+            WriteLine("{");
 
             _namespaceSections.Add(_indent);
             IndentAdd();
@@ -219,8 +219,8 @@ namespace XSolana.Builders
             if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(TypeName))
                 throw new ArgumentException("Class name cannot be null or empty.");
 
-            if(string.IsNullOrEmpty(type) || !TypeTypes.Contains(type))
-                throw new ArgumentException("Invalid type. Only 'class', 'struct', or 'interface' are allowed.");
+            if (string.IsNullOrEmpty(type) || !TypeTypes.Contains(type))
+                throw new ArgumentException("Invalid type. Only 'class', 'struct', 'enum', or 'interface' are allowed.");
 
             var typeName = string.IsNullOrEmpty(name)
                 ? TypeName : name;
@@ -238,7 +238,7 @@ namespace XSolana.Builders
         protected void EndType()
         {
             IndentLess();
-            Code.AppendLine("}");
+            WriteLine("}");
         }
     }
 }

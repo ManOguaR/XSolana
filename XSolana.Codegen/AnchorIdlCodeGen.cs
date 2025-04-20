@@ -52,9 +52,13 @@ namespace XSolana
                     var program = parser.ParseFromFile(idlPath);
 
                     //RunConstantsBuilder(program, OutputDir);
+                    RunInstructionDataBuilder(program, OutputDir);
                     RunInstructionBuilder(program, OutputDir);
-                    // RunProgramService(program, OutputDir);
-                    // RunAccountLayouts(program, OutputDir);
+                    RunAccountLayouts(program, OutputDir);
+                    RunErrorsBuilder(program, OutputDir);
+                    RunEventsBuilder(program, OutputDir);
+                    RunPdaHelpersBuilder(program, OutputDir);
+                    RunProgramServiceBuilder(program, OutputDir);
                 }
 
                 return true;
@@ -64,6 +68,18 @@ namespace XSolana
                 Log.LogErrorFromException(ex, true);
                 return false;
             }
+        }
+
+        private void RunInstructionDataBuilder(ProgramDefinition model, string outputDir)
+        {
+            var builder = new Builders.InstructionDataBuilder($"{model.Name}InstructionData", $"Generated.{model.Name}");
+            var content = builder.TransformText(model);
+
+            var outputPath = Path.Combine(outputDir, $"{model.Name}.InstructionDataBuilder.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            File.WriteAllText(outputPath, content);
+
+            Log.LogMessage(MessageImportance.Low, $"[XSolana] InstructionDataBuilder generado en: {outputPath}");
         }
 
         private void RunInstructionBuilder(ProgramDefinition model, string outputDir)
@@ -78,38 +94,60 @@ namespace XSolana
             Log.LogMessage(MessageImportance.Low, $"[XSolana] InstructionBuilder generado en: {outputPath}");
         }
 
-        //private void RunConstantsBuilder(ProgramDefinition model, string outputDir)
-        //{
-        //    var generator = new ConstantsBuilder(); // clase generada desde Constants.tt (preprocesada)
-        //    generator.Model = model;
+        private void RunErrorsBuilder(ProgramDefinition model, string outputDir)
+        {
+            var builder = new Builders.ErrorsBuilder($"{model.Name}Errors", $"Generated.{model.Name}");
+            var content = builder.TransformText(model);
+            var path = Path.Combine(outputDir, $"{model.Name}.Errors.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllText(path, content);
+            Log.LogMessage(MessageImportance.Low, $"[XSolana] ErrorsBuilder generado en: {path}");
+        }
 
-        //    var content = generator.TransformText();
+        private void RunEventsBuilder(ProgramDefinition model, string outputDir)
+        {
+            var builder = new Builders.EventsBuilder($"{model.Name}Events", $"Generated.{model.Name}");
+            var content = builder.TransformText(model);
+            var path = Path.Combine(outputDir, $"{model.Name}.Events.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllText(path, content);
+            Log.LogMessage(MessageImportance.Low, $"[XSolana] EventsBuilder generado en: {path}");
+        }
 
-        //    var outputPath = Path.Combine(outputDir, $"{Sanitize(model.Name)}.Constants.g.cs");
-        //    Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+        private void RunPdaHelpersBuilder(ProgramDefinition model, string outputDir)
+        {
+            var builder = new Builders.PdaHelpersBuilder($"{model.Name}Pda", $"Generated.{model.Name}");
+            var content = builder.TransformText(model);
+            var path = Path.Combine(outputDir, $"{model.Name}.PdaHelpers.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllText(path, content);
+            Log.LogMessage(MessageImportance.Low, $"[XSolana] PdaHelpersBuilder generado en: {path}");
+        }
 
-        //    File.WriteAllText(outputPath, content);
+        private void RunProgramServiceBuilder(ProgramDefinition model, string outputDir)
+        {
+            var builder = new Builders.ProgramServiceBuilder($"{model.Name}Service", $"Generated.{model.Name}");
+            var content = builder.TransformText(model);
+            var path = Path.Combine(outputDir, $"{model.Name}.Service.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllText(path, content);
+            Log.LogMessage(MessageImportance.Low, $"[XSolana] ProgramServiceBuilder generado en: {path}");
+        }
+        private void RunAccountLayouts(ProgramDefinition model, string outputDir)
+        {
+            // Nombre de la clase estática contenedora y del namespace “Generated.<program>”
+            var builder = new Builders.AccountLayoutBuilder(
+                $"{model.Name}Accounts", $"Generated.{model.Name}");
 
-        //    Log.LogMessage(MessageImportance.Low, $"[XSolana] Constants generado en: {outputPath}");
-        //}
+            var content = builder.TransformText(model);
 
-        //private void RunInstructionBuilder(ProgramDefinition model, string outputDir)
-        //{
-        //    var generator = new InstructionBuilder(); // generado desde InstructionBuilder.tt
-        //    generator.Model = model;
+            var outputPath = Path.Combine(outputDir, $"{Sanitize(model.Name)}.Accounts.g.cs");
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+            File.WriteAllText(outputPath, content);
 
-        //    var content = generator.TransformText();
-
-        //    var outputPath = Path.Combine(outputDir, $"{Sanitize(model.Name)}.InstructionBuilder.g.cs");
-        //    Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
-
-        //    File.WriteAllText(outputPath, content);
-
-        //    Log.LogMessage(MessageImportance.Low, $"[XSolana] InstructionBuilder generado en: {outputPath}");
-        //}
-
-        // private void RunProgramService(...) { ... }
-        // private void RunAccountLayouts(...) { ... }
+            Log.LogMessage(MessageImportance.Low,
+                $"[XSolana] AccountLayouts generado en: {outputPath}");
+        }
 
         private static string Sanitize(string name)
         {

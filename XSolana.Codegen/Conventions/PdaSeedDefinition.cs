@@ -1,10 +1,12 @@
 ﻿namespace XSolana.Conventions
 {
-    public class PdaSeedDefinition
-    {
-        public string Kind { get; set; }
+    public enum PdaSeedKind { Const, Account, Arg }
 
-        public object Value { get; set; }
+    public sealed class PdaSeedDefinition
+    {
+        public PdaSeedKind Kind { get; set; }
+
+        public byte[] ConstBytes { get; set; }
 
         public string Path { get; set; }
 

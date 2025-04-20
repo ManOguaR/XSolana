@@ -1,4 +1,4 @@
-﻿using System.Net.Sockets;
+﻿using System.Linq;
 using XSolana.Builders.Extensions;
 using XSolana.Conventions;
 
@@ -16,10 +16,10 @@ namespace XSolana.Builders
         /// <param name="namespace">A string representing the namespace for the generated class.</param>
         public InstructionBuilder(string className, string @namespace)
             : base(className, @namespace) {
-            Includes = new[] {
+            Includes = [
                 "Solnet.Rpc.Models",
                 "Solnet.Wallet"
-            };
+            ];
         }
 
         /// <summary>
@@ -41,9 +41,9 @@ BeginNamespace();
         WriteLine("public static TransactionInstruction Build(");
         IndentAdd();
                 foreach (var account in instr.Accounts)
-            WriteLine($"PublicKey {account.Name},");
+            WriteLine($"PublicKey {account.Name.ToCamelCase()},");
                 foreach (var arg in instr.Args)
-            WriteLine($"{arg.Type.ResolveCSharpType()} {arg.Name},");
+            WriteLine($"{arg.Type.ResolveCSharpType()} {arg.Name.ToCamelCase()},");
 
             WriteLine("PublicKey programId)");
         IndentLess();
@@ -53,12 +53,14 @@ BeginNamespace();
                 foreach (var account in instr.Accounts)
                 {
                     string metaType = account.IsSigner ? "Writable" : account.IsMut ? "Writable" : "ReadOnly";
-                WriteLine($"AccountMeta.{metaType}({account.Name}, {account.IsSigner.ToString().ToLower()}),");
+                WriteLine($"AccountMeta.{metaType}({account.Name.ToCamelCase()}, {account.IsSigner.ToString().ToLower()}),");
                 }
             EndBlock(";");
             WriteReturn();
-            WriteLine("// TODO: Serialize args using Borsh or similar");
-            WriteLine("var data = new byte[] { /* serialized instruction data */ };");
+                var argList = instr.Args.Any()
+                    ? string.Join(", ", instr.Args.Select(a => a.Name.ToCamelCase()))
+                    : string.Empty;
+            WriteLine($"var data = {instr.Name.ToPascalCase()}Data.Encode({argList});");
             WriteReturn();
             WriteLine("return new TransactionInstruction");
             BeginBlock();
